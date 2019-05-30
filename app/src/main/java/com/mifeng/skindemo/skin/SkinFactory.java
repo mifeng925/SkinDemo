@@ -5,6 +5,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -30,6 +31,8 @@ public class SkinFactory implements LayoutInflater.Factory2 {
     @Override
     public View onCreateView(View parent, String name, Context context, AttributeSet attrs) {
         View view = null;
+
+        Log.e(TAG, "onCreateView: "+name );
 
         if (name.contains(".")) {
             view = onCreateView(name, context, attrs);
@@ -78,7 +81,7 @@ public class SkinFactory implements LayoutInflater.Factory2 {
         if (skinItems.size() > 0) {
             SkinView skinView = new SkinView(view, skinItems);
             mSkinViews.add(skinView);
-            skinView.apply();
+//            skinView.apply();
         }
 
     }
@@ -158,9 +161,7 @@ public class SkinFactory implements LayoutInflater.Factory2 {
                         }
                     }
                 } else if (item.getName().equals("textColor")) {
-                    ColorStateList textColors = ((TextView) mView).getTextColors();
-                    int color = SkinManager.getInstance().getColor(item.getResId());
-                    ((TextView) mView).setTextColor(color);
+                    ((TextView) mView).setTextColor(SkinManager.getInstance().getColor(item.getResId()));
                 }
             }
         }

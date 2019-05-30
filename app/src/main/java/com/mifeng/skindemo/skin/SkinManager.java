@@ -63,13 +63,13 @@ public class SkinManager {
 
     public int getColor(int id){
         if (mResources == null) {
-            return id;
+            return  mContext.getResources().getColor(id);
         }
         String entryName = mContext.getResources().getResourceEntryName(id);
         String typeName = mContext.getResources().getResourceTypeName(id);
         int skinId = mResources.getIdentifier(entryName, typeName, skinPackge);
         if (skinId == 0) {
-            return id;
+            return  mContext.getResources().getColor(id);
         }
         return mResources.getColor(skinId);
     }
